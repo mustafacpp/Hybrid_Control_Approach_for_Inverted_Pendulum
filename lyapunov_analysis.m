@@ -1,4 +1,3 @@
-clear; clc; close all;
 load("linearized_model_ss.mat")
 
 % ----- Time invariant system parameters -----
@@ -21,8 +20,10 @@ disp("--------------- see the unstable state causing downfall ---------------")
 eigA = eig(A)
 
 
-Q = diag([1 0.1 100 2000]);
-R = 2;
+Q = diag([100 0.1 400 1000]);
+R = 0.1;
 disp("--------------- LQR Gain ---------------")
 K_lqr = lqr(A,B,Q,R)
 s = size(K_lqr)
+
+E_rms = rms(out.xdot.signals.values)
